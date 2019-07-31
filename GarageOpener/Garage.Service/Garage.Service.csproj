@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Garage.Persistance\Garage.Persistance.csproj" />
+    <ProjectReference Include="..\Garage.Repository\Garage.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Home.Core.Gpio\Home.Core.Gpio.csproj" />
+    <ProjectReference Include="..\..\Home.Core\Home.Core.Gpio\Home.Core.Gpio.csproj" />
+  </ItemGroup>
+
+</Project>

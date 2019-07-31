@@ -3,3 +3,14 @@
 ################################################################################
 
 /GarageOpener/Garage.Persistance/bin
+/GarageOpener/Garage.Persistance/obj
+/GarageOpener/.vs/GarageOpener
+/GarageOpener/Garage.Repository/bin
+/GarageOpener/Garage.Repository/obj
+/GarageOpener/Garage.Service/bin
+/GarageOpener/Garage.Service/obj
+/GarageOpener/Garage.Service/Properties
+/GarageOpener/Garage.UnitTests/obj
+/Home.Core/Home.Core.Gpio/bin
+/Home.Core/Home.Core.Gpio/obj
+/GarageOpener/Garage.UnitTests/bin/Debug/netcoreapp3.0
