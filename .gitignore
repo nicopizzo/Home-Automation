@@ -14,3 +14,6 @@
 /Home.Core/Home.Core.Gpio/bin
 /Home.Core/Home.Core.Gpio/obj
 /GarageOpener/Garage.UnitTests/bin/Debug/netcoreapp3.0
+/Home.Core/Home.Core.Security/bin/Debug/netcoreapp3.0
+/Home.Core/Home.Core.Security/obj
+/Home.Core/HomeAutomation-Android

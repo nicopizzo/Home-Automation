@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Home.Core.Gpio;
+using Home.Core.Security;
 
 namespace Garage.Service
 {
@@ -34,6 +35,7 @@ namespace Garage.Service
             app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<TokenVerification>(Configuration.GetValue<string>("TokenKey"));
 
             app.UseRouting();
 

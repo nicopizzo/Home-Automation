@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Garage.Persistance", "Garag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Home.Core.Gpio", "..\Home.Core\Home.Core.Gpio\Home.Core.Gpio.csproj", "{3D21A8EA-BB0A-4744-9430-863DEE7254CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Core.Security", "..\Home.Core\Home.Core.Security\Home.Core.Security.csproj", "{CC7378D6-11FF-4089-BD34-DE6C4D4CDC8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3D21A8EA-BB0A-4744-9430-863DEE7254CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D21A8EA-BB0A-4744-9430-863DEE7254CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D21A8EA-BB0A-4744-9430-863DEE7254CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7378D6-11FF-4089-BD34-DE6C4D4CDC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7378D6-11FF-4089-BD34-DE6C4D4CDC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7378D6-11FF-4089-BD34-DE6C4D4CDC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7378D6-11FF-4089-BD34-DE6C4D4CDC8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Home.Core\Home.Core.Gpio\Home.Core.Gpio.csproj" />
+    <ProjectReference Include="..\..\Home.Core\Home.Core.Security\Home.Core.Security.csproj" />
     <ProjectReference Include="..\Garage.Persistance\Garage.Persistance.csproj" />
     <ProjectReference Include="..\Garage.Repository\Garage.Repository.csproj" />
   </ItemGroup>
