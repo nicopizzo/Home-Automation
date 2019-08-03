@@ -28,7 +28,7 @@ namespace Garage.UnitTests
             _PinOpenMappings = new Dictionary<int, bool>();
             _PinModeMappings = new Dictionary<int, bool>();
 
-            _GarageConfig = new GarageConfig() { TogglePin = 4, OpenPin = 17, ClosedPin = 27 };
+            _GarageConfig = new GarageConfig() { TogglePin = 4, ClosedPin = 27 };
 
             _MockGpioController = new Mock<IGpioController>();
             _MockLogger = new Mock<AbstractLogger<GarageRepo>>();

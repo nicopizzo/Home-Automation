@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Device.Gpio;
 
 namespace Home.Core.Gpio
@@ -8,16 +9,18 @@ namespace Home.Core.Gpio
         public int PinCount { get; set; } = 40;
 
         private readonly string _Command;
+        private readonly ILogger<BashGpioController> _Logger;
 
-
-        public BashGpioController()
+        public BashGpioController(ILogger<BashGpioController> logger)
         {
             _Command = "gpio {0} {1} {2}";
+            _Logger = logger;
         }
 
-        public BashGpioController(string command)
+        public BashGpioController(ILogger<BashGpioController> logger, string command)
         {
             _Command = command;
+            _Logger = logger;
         }
 
         public void ClosePin(int pinNumber)
@@ -55,8 +58,10 @@ namespace Home.Core.Gpio
         public PinValue Read(int pinNumber)
         {
             var command = string.Format(_Command, GpioCommands.Read, pinNumber.ToString(), "");
-            var value = command.Bash();
-            return value == GpioValue.High ? PinValue.High : PinValue.Low;
+            _Logger.Log(LogLevel.Debug, $"Reading Pin {pinNumber} with command: {command}");
+            var value = command.Bash()?.Substring(0, 1);
+            _Logger.Log(LogLevel.Debug, $"Raw value is {value}");
+            return value == "1" ? PinValue.High : PinValue.Low;
         }
 
         public void Read(Span<PinValuePair> pinValuePairs)
@@ -70,12 +75,14 @@ namespace Home.Core.Gpio
         public void SetPinMode(int pinNumber, PinMode mode)
         {
             var command = string.Format(_Command, GpioCommands.Mode, pinNumber, mode == PinMode.Input ? GpioMode.In : GpioMode.Out);
+            _Logger.Log(LogLevel.Debug, $"Setting Pin mode on pin {pinNumber} with command: {command}");
             command.Bash();
         }
 
         public void Write(int pinNumber, PinValue value)
         {
             var command = string.Format(_Command, GpioCommands.Write, pinNumber.ToString(), value == PinValue.High ? GpioValue.High : GpioValue.Low);
+            _Logger.Log(LogLevel.Debug, $"Setting Pin Value on pin {pinNumber} with command: {command}");
             command.Bash();
         }
 

@@ -42,25 +42,16 @@ namespace Garage.Repository
             var result = GarageStatus.Closed;
             _logger.Log(LogLevel.Information, "Getting Status...");
 
-            if (!_gpioController.IsPinOpen(_config.OpenPin))
-            {
-                _gpioController.OpenPin(_config.OpenPin);
-                _gpioController.SetPinMode(_config.OpenPin, PinMode.Input);
-            }
             if (!_gpioController.IsPinOpen(_config.ClosedPin))
             {
                 _gpioController.OpenPin(_config.ClosedPin);
                 _gpioController.SetPinMode(_config.ClosedPin, PinMode.Input);
             }
 
-            var openResult = _gpioController.Read(_config.OpenPin);
-            var closeResult = _gpioController.Read(_config.ClosedPin);
+            var rawResult = _gpioController.Read(_config.ClosedPin);
+            _logger.Log(LogLevel.Information, $"Pin in {rawResult}");
+            if (rawResult == PinValue.High) result = GarageStatus.Open;
 
-            if (openResult == PinValue.High) result = GarageStatus.Open;
-            else if (closeResult == PinValue.High) result = GarageStatus.Closed;
-            else result = GarageStatus.InBetween;
-
-            _gpioController.ClosePin(_config.OpenPin);
             _gpioController.ClosePin(_config.ClosedPin);
 
             _logger.Log(LogLevel.Information, $"Garage is {result}");

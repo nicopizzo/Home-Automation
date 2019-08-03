@@ -24,8 +24,8 @@ namespace Garage.Service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin") });
-            services.AddSingleton<IGpioController>(f => new BashGpioController());
+            services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin"), ClosedPin = Configuration.GetValue<int>("ClosedPin") });
+            services.AddSingleton<IGpioController, BashGpioController>();
             services.AddSingleton<IGarageRepo, GarageRepo>();
         }
 
