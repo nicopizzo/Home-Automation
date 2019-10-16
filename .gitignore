@@ -18,3 +18,8 @@
 /Home.Core/Home.Core.Security/obj
 /Home.Core/HomeAutomation-Android
 /Home.Core/Home.Core.Security/bin/Release/netcoreapp3.0
+/HomeAutomation-Android/.vs/HomeAutomation-Android
+/HomeAutomation-Android/bin/Debug
+/HomeAutomation-Android/HomeAutomationApp.Core/bin/Debug
+/HomeAutomation-Android/HomeAutomationApp.Core/obj
+/HomeAutomation-Android/obj

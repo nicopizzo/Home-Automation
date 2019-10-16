@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomation-Android", "HomeAutomation-Android.csproj", "{39382164-FB35-4D35-ABCB-CDDE6146D924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomationApp.Core", "HomeAutomationApp.Core\HomeAutomationApp.Core.csproj", "{2BBB9666-414F-4815-A1BF-DBBB321661A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39382164-FB35-4D35-ABCB-CDDE6146D924}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2BBB9666-414F-4815-A1BF-DBBB321661A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBB9666-414F-4815-A1BF-DBBB321661A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBB9666-414F-4815-A1BF-DBBB321661A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBB9666-414F-4815-A1BF-DBBB321661A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12646842-79E0-4EA2-9E9F-9C2C6A6BD70D}
+	EndGlobalSection
+EndGlobal
