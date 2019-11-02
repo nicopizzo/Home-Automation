@@ -4,6 +4,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+    
+    <data>
+        <variable 
+            name="containerData"
+            type="HomeAutomation_Android.Models.ContainerModel" />
+    </data>
 
     <!-- Container Name -->
     <TextView
@@ -11,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/container_name"
-        android:text="Garage"
+        android:text="@{containerData.ContainerName}"
         android:textSize="@dimen/abc_dropdownitem_icon_width"/>
 
     <!-- Container Status -->
