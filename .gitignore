@@ -23,7 +23,14 @@
 /HomeAutomation-Android/HomeAutomationApp.Core/bin/Debug
 /HomeAutomation-Android/HomeAutomationApp.Core/obj
 /HomeAutomation-Android/obj
-/Alexa/.vs/Alexa_Functions
-/Alexa/.vs/Alexa_Functions
+/Alexa/.vs
 /Home.Core/Home.Core.Clients/bin/Debug/netstandard2.0
 /Home.Core/Home.Core.Clients/obj
+/.vs
+/Alexa/Alexa_Functions.Tests/.vs
+/Alexa/Alexa_Functions.Tests/obj
+/Alexa/Alexa_Functions.Tests/bin
+/Alexa/Alexa_Functions/.vs
+/Alexa/Alexa_Functions/.lambda-test-tool
+/Alexa/Alexa_Functions/obj
+/Alexa/Alexa_Functions/bin
