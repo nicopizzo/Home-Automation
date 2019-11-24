@@ -94,12 +94,6 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="HomeAutomationApp.Core\HomeAutomationApp.Core.csproj">
-      <Project>{2BBB9666-414F-4815-A1BF-DBBB321661A3}</Project>
-      <Name>HomeAutomationApp.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\color.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Home.Core\Home.Core.Clients\Home.Core.Clients.csproj">
+      <Project>{74a2761b-fc41-4cf3-866d-3b2a6f9f1329}</Project>
+      <Name>Home.Core.Clients</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -7,14 +7,14 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using HomeAutomationApp.Core;
+using Home.Core.Clients;
 
 namespace HomeAutomation_Android
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        private GarageAppCore _GarageCore;
+        private GarageClient _GarageCore;
         private TextView _GarageStatusTxt;
         private bool _EventsSubscribed = false;
 
@@ -60,7 +60,7 @@ namespace HomeAutomation_Android
             //_GarageCore = new GarageAppCore("http://pizzohome.ddns.net:5000", "Testing123");
             try
             {
-                _GarageCore = new GarageAppCore(UserSettings.GarageApiEndpoint, UserSettings.Token);
+                _GarageCore = new GarageClient(UserSettings.GarageApiEndpoint, UserSettings.Token);
 
                 Button garageButton = FindViewById<Button>(Resource.Id.toggleBtn);
                 Button statusButton = FindViewById<Button>(Resource.Id.refresh);

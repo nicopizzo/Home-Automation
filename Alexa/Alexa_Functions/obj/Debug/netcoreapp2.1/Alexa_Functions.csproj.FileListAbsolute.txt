@@ -1,0 +1,13 @@
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Alexa_Functions.deps.json
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Alexa_Functions.runtimeconfig.json
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Alexa_Functions.runtimeconfig.dev.json
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Alexa_Functions.dll
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.csprojAssemblyReference.cache
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.AssemblyInfoInputs.cache
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.AssemblyInfo.cs
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Alexa_Functions.pdb
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.dll
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.pdb
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Home.Core.Clients.dll
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\bin\Debug\netcoreapp2.1\Home.Core.Clients.pdb
+D:\Projects\Home-Automation\Alexa\Alexa_Functions\obj\Debug\netcoreapp2.1\Alexa_Functions.csproj.CopyComplete
