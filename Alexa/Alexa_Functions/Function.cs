@@ -1,7 +1,6 @@
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
-using Alexa.NET.Response.Directive;
 using Alexa_Functions.Models;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
@@ -9,7 +8,6 @@ using Home.Core.Clients.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -146,7 +144,7 @@ namespace Alexa_Functions
             var action = intent.Slots["action"].Resolution?.Authorities.FirstOrDefault()?.Values.FirstOrDefault()?.Value.Id;
             var currentStatus = await garage.GetGarageStatus();
             if (currentStatus.ToString() == action) return $"Garage is already {ConvertStatus(currentStatus)}";
-            //await garage.ToggleGarage();
+            await garage.ToggleGarage();
             return $"Garage is {action}ing";
         }
 
