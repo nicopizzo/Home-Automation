@@ -8,12 +8,23 @@ namespace Home.Core.Clients
 {
     public abstract class ClientBase
     {
-        protected HttpClient _Client;
+        protected readonly HttpClient _Client;
 
         public ClientBase(string baseUrl, string token)
         {
             _Client = new HttpClient();
+            UpdateBaseAndToken(baseUrl, token);
+        }
+
+        public ClientBase(HttpClient client)
+        {
+            _Client = client;
+        }
+
+        public void UpdateBaseAndToken(string baseUrl, string token)
+        {
             _Client.BaseAddress = new Uri(baseUrl);
+            _Client.DefaultRequestHeaders.Clear();
             _Client.DefaultRequestHeaders.Add("Token", token);
         }
 

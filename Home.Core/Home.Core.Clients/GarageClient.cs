@@ -1,13 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using Home.Core.Clients.Interfaces;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Home.Core.Clients
 {
-    public class GarageClient : ClientBase
+    public class GarageClient : ClientBase, IGarage
     {
         public GarageClient(string baseUrl, string token) : base(baseUrl, token)
         {
 
         }
+
+        public GarageClient(HttpClient client) : base(client) { }
 
         public async Task ToggleGarage()
         {

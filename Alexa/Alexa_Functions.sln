@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa_Functions", "Alexa_Fu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alexa_Functions.Tests", "Alexa_Functions.Tests\Alexa_Functions.Tests.csproj", "{D6B19AD0-A6DF-4A1F-9222-23400CA4AD77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Home.Core.Clients", "..\Home.Core\Home.Core.Clients\Home.Core.Clients.csproj", "{D001D1A0-B9A7-4340-A1C2-C4AF9A837368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Home.Core.Clients", "..\Home.Core\Home.Core.Clients\Home.Core.Clients.csproj", "{D001D1A0-B9A7-4340-A1C2-C4AF9A837368}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,35 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Transform" : "AWS::Serverless-2016-10-31",
+  "Description" : "Alexa Garage Automation suppport.",
+  "Parameters" : {
+  },
+  "Resources" : {
+    "RegisterHandler" : {
+      "Type" : "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "Alexa_Functions::Alexa_Functions.Function::RegisterHandler",
+        "Runtime": "dotnetcore2.1",
+        "CodeUri": "",
+        "Description": "Handles User setting registration",
+        "MemorySize": 256,
+        "Timeout": 30,
+        "Role": null,
+        "Policies": [ "AWSLambdaFullAccess" ]
+      }
+    },
+	"AlexaHandler" : {
+      "Type" : "AWS::Serverless::Function",
+      "Properties": {
+        "Handler": "Alexa_Functions::Alexa_Functions.Function::AlexaHandler",
+        "Runtime": "dotnetcore2.1",
+        "CodeUri": "",
+        "Description": "Handles Alex inputs",
+        "MemorySize": 256,
+        "Timeout": 30,
+        "Role": null,
+        "Policies": [ "AWSLambdaFullAccess" ]
+      }
+    }
+  }
+}

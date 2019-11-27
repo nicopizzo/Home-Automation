@@ -34,3 +34,4 @@
 /Alexa/Alexa_Functions/.lambda-test-tool
 /Alexa/Alexa_Functions/obj
 /Alexa/Alexa_Functions/bin
+/Home.Core/Home.Core.Clients/bin/Release/netstandard2.0
