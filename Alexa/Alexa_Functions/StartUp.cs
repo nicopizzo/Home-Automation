@@ -27,7 +27,7 @@ namespace Alexa_Functions
                 return new AmazonDynamoDBClient(o.Value.AccessKey, o.Value.SecretKey);
             });
             services.AddSingleton<IEndpointService, EndpointService>();
-            services.AddSingleton<IGarage>(f =>
+            services.AddTransient<IGarage>(f =>
             {
                 return new GarageClient(new HttpClient());
             });

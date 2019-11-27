@@ -23,7 +23,7 @@ namespace Alexa_Functions
             var request = new GetItemRequest(_DBSettings.Value.TableName, new Dictionary<string, AttributeValue>() { { "userid", new AttributeValue(userId) } });
             var response = await _Client.GetItemAsync(request);
 
-            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK) return null;
+            if (response.HttpStatusCode != System.Net.HttpStatusCode.OK || response.Item.Count == 0) return null;
             var e = new Models.Endpoint(response.Item);
             return e;
         }

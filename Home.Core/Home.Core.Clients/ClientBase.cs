@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Home.Core.Clients
 {
-    public abstract class ClientBase
+    public abstract class ClientBase : IDisposable
     {
         protected readonly HttpClient _Client;
 
@@ -62,6 +62,11 @@ namespace Home.Core.Clients
             if (!httpResponse.IsSuccessStatusCode) throw new HttpRequestException(httpResponse.ReasonPhrase);
             var content = await httpResponse.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(content);
+        }
+
+        public void Dispose()
+        {
+            _Client?.Dispose();
         }
     }
 }

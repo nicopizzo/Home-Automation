@@ -1,6 +1,7 @@
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
+using Alexa.NET.Response.Directive;
 using Alexa_Functions.Models;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
@@ -8,6 +9,8 @@ using Home.Core.Clients.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -91,16 +94,15 @@ namespace Alexa_Functions
             switch (request.Intent.Name)
             {
                 case "GetStatus":
-                    result = await GetStatus(garageService);
-                    response.Response.OutputSpeech = new PlainTextOutputSpeech($"Garage Door is {result}");
+                    result = await GetStatus(garageService, request.Intent);
                     break;
 
                 case "Move":
-                    var action = request.Intent.Slots["action"].Value;
-                    result = await MoveGarage(garageService, action);
-                    response.Response.OutputSpeech = new PlainTextOutputSpeech(result);
+                    result = await MoveGarage(garageService, request.Intent);
                     break;
             }
+
+            if(result != null) response.Response.OutputSpeech = new PlainTextOutputSpeech(result);
 
             return response;
         }
@@ -108,9 +110,7 @@ namespace Alexa_Functions
         private SkillResponse HandleLaunchRequest(SkillRequest input)
         {
             var response = CreateBasicSkillResponse();
-            //response.Response.OutputSpeech = new PlainTextOutputSpeech("Are you sure you want to open the garage?");
-            //response.Response.Reprompt = new Reprompt() { OutputSpeech = response.Response.OutputSpeech };
-            //response.Response.ShouldEndSession = false;
+            response.Response.OutputSpeech = new PlainTextOutputSpeech("Invalid request. try saying ask garage door to open");
 
             return response;
         }
@@ -129,17 +129,24 @@ namespace Alexa_Functions
             return response;
         }
 
-        private async Task<string> GetStatus(IGarage garage)
+        private async Task<string> GetStatus(IGarage garage, Intent intent)
         {
+            string askedStatus = null;
+            if (intent.Slots.ContainsKey("status")) askedStatus = intent.Slots["status"].Resolution?.Authorities.FirstOrDefault()?.Values.FirstOrDefault()?.Value.Id;
+
             int value = await garage.GetGarageStatus();
-            return ConvertStatus(value);
+
+            var prefix = askedStatus == null ? "" : (askedStatus == value.ToString() ? "Yes, " : "No, ");
+
+            return $"{prefix}the garage is {ConvertStatus(value)}";
         }
 
-        private async Task<string> MoveGarage(IGarage garage, string action)
+        private async Task<string> MoveGarage(IGarage garage, Intent intent)
         {
+            var action = intent.Slots["action"].Resolution?.Authorities.FirstOrDefault()?.Values.FirstOrDefault()?.Value.Id;
             var currentStatus = await garage.GetGarageStatus();
-            if (ConvertStatus(currentStatus) == action) return $"Garage is already {action}";
-            await garage.ToggleGarage();
+            if (currentStatus.ToString() == action) return $"Garage is already {ConvertStatus(currentStatus)}";
+            //await garage.ToggleGarage();
             return $"Garage is {action}ing";
         }
 
@@ -152,8 +159,9 @@ namespace Alexa_Functions
 
         private string ConvertStatus(int status)
         {
-            if (status == 0) return "close";
-            return "open";
+            var val = "open";
+            if (status == 0) val = "closed";
+            return val;
         }
     }
 }

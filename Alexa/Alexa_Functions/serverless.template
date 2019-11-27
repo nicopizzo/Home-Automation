@@ -11,6 +11,10 @@
         "Handler": "Alexa_Functions::Alexa_Functions.Function::RegisterHandler",
         "Runtime": "dotnetcore2.1",
         "CodeUri": "",
+		"Tags": {
+			"garage": "",
+			"automation": ""
+		},
         "Description": "Handles User setting registration",
         "MemorySize": 256,
         "Timeout": 30,
@@ -24,6 +28,10 @@
         "Handler": "Alexa_Functions::Alexa_Functions.Function::AlexaHandler",
         "Runtime": "dotnetcore2.1",
         "CodeUri": "",
+		"Tags": {
+			"garage": "",
+			"automation": ""
+		},
         "Description": "Handles Alex inputs",
         "MemorySize": 256,
         "Timeout": 30,
