@@ -12,7 +12,7 @@ namespace Garage.Repository
         private readonly GarageConfig _config;
         private readonly ILogger<GarageRepo> _logger;
 
-        public GarageRepo(IGpioController gpioController, GarageConfig config, ILogger<GarageRepo> logger) : base(gpioController)
+        public GarageRepo(GpioController gpioController, GarageConfig config, ILogger<GarageRepo> logger) : base(gpioController)
         {
             _config = config;
             _logger = logger;

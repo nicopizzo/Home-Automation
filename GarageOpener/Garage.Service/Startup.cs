@@ -25,8 +25,8 @@ namespace Garage.Service
         {
             services.AddControllers();
             services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin"), ClosedPin = Configuration.GetValue<int>("ClosedPin") });
-            services.AddSingleton<IGpioController, BashGpioController>();
-            services.AddSingleton<IGarageRepo, GarageRepo>();
+            //services.AddSingleton<IGpioController, BashGpioController>();
+            services.AddSingleton<IGarageRepo, GarageNewRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

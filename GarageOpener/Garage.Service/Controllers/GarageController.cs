@@ -41,5 +41,13 @@ namespace Garage.Service.Controllers
             _Logger.Log(LogLevel.Information, "GetPinDetails Start...");
             return _GarageRepo.GetPinDetails(pin);
         }
+
+        [HttpPost("setPinDetails")]
+        public ActionResult setPinDetails(PinDetails details)
+        {
+            _Logger.Log(LogLevel.Information, "SetPinDetails Start...");
+            _GarageRepo.SetPinDetails(details);
+            return Ok();
+        }
     }
 }

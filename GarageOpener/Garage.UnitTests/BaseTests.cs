@@ -1,5 +1,4 @@
 ﻿using Garage.Persitance;
-using Garage.Persitance.Interfaces;
 using Garage.Repository;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,7 +6,6 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Device.Gpio;
-using System.Text;
 
 namespace Garage.UnitTests
 {
@@ -15,7 +13,7 @@ namespace Garage.UnitTests
     public class BaseTests
     {
         protected GarageConfig _GarageConfig;
-        protected Mock<IGpioController> _MockGpioController;
+        protected Mock<GpioController> _MockGpioController;
         protected Mock<AbstractLogger<GarageRepo>> _MockLogger;
         private Dictionary<int, bool> _PinMappings;
         private Dictionary<int, bool> _PinOpenMappings;
@@ -30,7 +28,7 @@ namespace Garage.UnitTests
 
             _GarageConfig = new GarageConfig() { TogglePin = 4, ClosedPin = 27 };
 
-            _MockGpioController = new Mock<IGpioController>();
+            _MockGpioController = new Mock<GpioController>();
             _MockLogger = new Mock<AbstractLogger<GarageRepo>>();
 
             _MockLogger.Setup(f => f.Log(LogLevel.Information, It.IsAny<Exception>(), It.IsAny<string>()));

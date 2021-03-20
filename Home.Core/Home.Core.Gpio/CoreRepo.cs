@@ -4,9 +4,9 @@ namespace Home.Core.Gpio
 {
     public abstract class CoreRepo : IGpioCore
     {
-        protected IGpioController _gpioController;
+        protected GpioController _gpioController;
 
-        public CoreRepo(IGpioController gpioController)
+        public CoreRepo(GpioController gpioController)
         {
             _gpioController = gpioController;
         }
