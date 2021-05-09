@@ -5,7 +5,6 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>fccb4e6e-2405-4da7-85d4-788618abbd71</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/values</DockerServiceUrl>
     <DockerServiceName>garage.service</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

@@ -39,3 +39,4 @@
 /GarageOpener/Garage.UnitTests/bin/Debug
 /GarageOpener/obj
 /Home.Core/Home.Core.Security/bin
+*.cache

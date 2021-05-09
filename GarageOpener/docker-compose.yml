@@ -4,13 +4,6 @@ services:
   garage.service:
     image: ${DOCKER_REGISTRY-}garageservice
     build:
-      context: .
-      dockerfile: Garage.Service/Dockerfile
+      context: ../
+      dockerfile: GarageOpener/Garage.Service/Dockerfile
     restart: always
-  #web:
-  #  image: nginx
-  #  ports:
-  #   - "55101:80"
-  #  environment:
-  #   - NGINX_PORT=55101
-  #  restart: always

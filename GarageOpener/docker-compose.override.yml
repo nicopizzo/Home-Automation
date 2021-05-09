@@ -4,8 +4,11 @@ services:
   garage.service:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:80 
+      - TogglePin=7
+      - ClosedPin=22
+      - TokenKey=Testing123
     ports:
-      - "80"
+      - "8000:80"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

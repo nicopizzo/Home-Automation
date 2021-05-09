@@ -2,6 +2,7 @@
 using Garage.Persitance.Interfaces;
 using Home.Core.Gpio;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 using Unosquare.RaspberryIO;
 using Unosquare.WiringPi;
@@ -18,6 +19,7 @@ namespace Garage.Repository
             _config = config;
             _logger = logger;
             Pi.Init<BootstrapWiringPi>();
+            InitPins();
         }
 
         public GarageStatus GetGarageStatus()
@@ -48,9 +50,20 @@ namespace Garage.Repository
 
         public void SetPinDetails(PinDetails pinDetails)
         {
-            var pin = Pi.Gpio[pinDetails.PinNumber];
-            pin.Value = pinDetails.PinValue == 1;
-            pin.PinMode = pinDetails.PinMode == System.Device.Gpio.PinMode.Input ? Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Input : Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Output;
+            try
+            {
+                var pin = Pi.Gpio[pinDetails.PinNumber];
+                pin.PinMode = pinDetails.PinMode == System.Device.Gpio.PinMode.Input ? Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Input : Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Output;
+                if(pinDetails.PinMode == System.Device.Gpio.PinMode.Output)
+                {
+                    pin.Value = pinDetails.PinValue == 1;
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Failed to set pin details.");
+                throw;
+            }
         }
 
         public void ToggleGarage()
@@ -61,6 +74,20 @@ namespace Garage.Repository
             Task.Delay(650).Wait();
             _logger.Log(LogLevel.Debug, $"Setting Pin {_config.TogglePin} High");
             Pi.Gpio[_config.TogglePin].Value = true;
+        }
+
+        private void InitPins()
+        {
+            _logger.LogInformation("Initializing pins");
+            try
+            {
+                Pi.Gpio[_config.TogglePin].PinMode = Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Output;
+                Pi.Gpio[_config.TogglePin].Value = true;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Unable to init pins");
+            }
         }
     }
 }
