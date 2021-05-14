@@ -4,11 +4,18 @@ services:
   garage.service:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80 
-      - TogglePin=7
-      - ClosedPin=22
+      - ASPNETCORE_URLS=http://+:80
+      - TogglePin=4
+      - ClosedPin=6
       - TokenKey=Testing123
     ports:
       - "8000:80"
+      - "8001:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  ngrok:
+    environment:
+      NGROK_AUTH: <somekey>
+      NGROK_PORT: http://garage.service:80
+    ports:
+      - "4040:4040"
