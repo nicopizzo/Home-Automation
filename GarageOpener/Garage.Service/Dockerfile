@@ -1,11 +1,11 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0.5-buster-slim-arm32v7 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0.0-bullseye-slim-arm64v8 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0.202 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["GarageOpener/Garage.Service/Garage.Service.csproj", "GarageOpener/Garage.Service/"]
 COPY ["Home.Core/Home.Core.Security/Home.Core.Security.csproj", "Home.Core/Home.Core.Security/"]
