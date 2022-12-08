@@ -42,3 +42,4 @@
 *.cache
 /GarageOpener/.vs/ProjectEvaluation
 /GarageOpener/docker-compose.dcproj.user
+/GarageOpener/Garage.Service/Garage.Service.csproj.user

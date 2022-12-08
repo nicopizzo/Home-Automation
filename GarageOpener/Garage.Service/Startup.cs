@@ -25,7 +25,7 @@ namespace Garage.Service
         {
             services.AddControllers();
             services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin"), ClosedPin = Configuration.GetValue<int>("ClosedPin") });
-            services.AddSingleton<IGarageRepo, GarageNewRepo>();
+            services.AddSingleton<IGarageRepo, GarageRepo>();
             services.AddHealthChecks();
         }
 
@@ -34,7 +34,6 @@ namespace Garage.Service
         {
             app.UseDeveloperExceptionPage();
 
-            app.UseHttpsRedirection();
             app.UseMiddleware<TokenVerification>(Configuration.GetValue<string>("TokenKey"));
 
             app.UseRouting();

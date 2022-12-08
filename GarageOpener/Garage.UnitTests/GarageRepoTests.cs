@@ -4,6 +4,7 @@ using Moq;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Device.Gpio;
+using System.Threading.Tasks;
 
 namespace Garage.UnitTests
 {
@@ -13,7 +14,7 @@ namespace Garage.UnitTests
         [TestMethod]
         public void ToggleGarage_PinClosed_Test()
         {
-            var repo = new GarageRepo(_MockGpioController.Object, _GarageConfig, _MockLogger.Object);
+            var repo = new GarageRepo(_GarageConfig, _MockLogger.Object);
 
             repo.ToggleGarage();
 
@@ -28,12 +29,12 @@ namespace Garage.UnitTests
         }
 
         [TestMethod]
-        public void ToggleGarage_PinOpen_Test()
+        public async Task ToggleGarage_PinOpen_Test()
         {
             ModifyPinOpen(_GarageConfig.TogglePin, true);
-            var repo = new GarageRepo(_MockGpioController.Object, _GarageConfig, _MockLogger.Object);
+            var repo = new GarageRepo(_GarageConfig, _MockLogger.Object);
 
-            repo.ToggleGarage();
+            await repo.ToggleGarage();
 
             Assert.IsTrue(GetPinValue(_GarageConfig.TogglePin) == PinValue.Low);
             Assert.IsFalse(GetPinOpenValue(_GarageConfig.TogglePin));

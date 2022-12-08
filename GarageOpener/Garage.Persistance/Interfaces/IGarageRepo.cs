@@ -1,10 +1,11 @@
 ﻿using Home.Core.Gpio;
+using System.Threading.Tasks;
 
 namespace Garage.Persitance.Interfaces
 {
     public interface IGarageRepo : IGpioCore
     {
-        void ToggleGarage();
+        Task ToggleGarage();
         GarageStatus GetGarageStatus();
     }
 }

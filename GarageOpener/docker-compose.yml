@@ -7,6 +7,3 @@ services:
       context: ../
       dockerfile: GarageOpener/Garage.Service/Dockerfile
     restart: always
-  ngrok:
-    image: wernight/ngrok:armhf
-    restart: always

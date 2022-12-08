@@ -3,6 +3,7 @@ using Garage.Persitance.Interfaces;
 using Home.Core.Gpio;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Garage.Service.Controllers
 {
@@ -20,10 +21,10 @@ namespace Garage.Service.Controllers
         }
 
         [HttpPut("toggleGarage")]
-        public ActionResult toggleGarage()
+        public async Task<IActionResult> toggleGarage()
         {
             _Logger.Log(LogLevel.Information, "Toggle Start...");
-            _GarageRepo.ToggleGarage();
+            await _GarageRepo.ToggleGarage();
             _Logger.Log(LogLevel.Information, "Toggle Finished...");
             return Ok();
         }
