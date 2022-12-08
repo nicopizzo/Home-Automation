@@ -41,3 +41,4 @@
 /Home.Core/Home.Core.Security/bin
 *.cache
 /GarageOpener/.vs/ProjectEvaluation
+/GarageOpener/docker-compose.dcproj.user
