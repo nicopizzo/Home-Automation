@@ -43,3 +43,9 @@
 /GarageOpener/.vs/ProjectEvaluation
 /GarageOpener/docker-compose.dcproj.user
 /GarageOpener/Garage.Service/Garage.Service.csproj.user
+/Home-Automation-Maui/.vs
+/Home-Automation-Maui/bin/Debug
+/Home-Automation-Maui/obj
+/Home.Core/Home.Core.Clients/bin/Debug/netstandard2.1
+/HomeAutomation-Android/.vs/ProjectEvaluation
+*.htm

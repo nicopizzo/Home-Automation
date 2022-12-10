@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Home_Automation_Maui.Views.SettingsPage"
+             Title="Settings"
+             xmlns:viewmodel="clr-namespace:Home_Automation_Maui.ViewModels"
+             xmlns:model="clr-namespace:Home_Automation_Maui.Models"
+             x:DataType="viewmodel:SettingsViewModel">
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Settings}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:SettingModel">
+                    <HorizontalStackLayout Margin="20" 
+                                           HorizontalOptions="Center"
+                                           Spacing="10">
+                        <Label Text="{Binding SettingName}"/>
+                        <Entry Text="{Binding SettingValue}"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout HorizontalOptions="Center"
+                               Spacing="10">
+            <Button Text="Save"
+                    Command="{Binding SaveSettingsCommand}"/>
+            <Button Text="Clear"
+                Command="{Binding ClearSettingsCommand}"/>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+
+    
+</ContentPage>
