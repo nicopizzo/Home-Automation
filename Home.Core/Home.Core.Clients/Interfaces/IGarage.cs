@@ -2,8 +2,11 @@
 
 namespace Home.Core.Clients.Interfaces
 {
-    public interface IGarage : IClientBase
+    public interface IGarage
     {
+        string BaseAddress { get; set; }
+        string Token { get; set; }
+
         Task ToggleGarage();
         Task<int> GetGarageStatus();
     }

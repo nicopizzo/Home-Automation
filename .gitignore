@@ -49,3 +49,7 @@
 /Home.Core/Home.Core.Clients/bin/Debug/netstandard2.1
 /HomeAutomation-Android/.vs/ProjectEvaluation
 *.htm
+/PizzoHomeAutomation/.vs
+/PizzoHomeAutomation/bin/Debug
+/PizzoHomeAutomation/obj
+/PizzoHomeAutomation/PizzoHomeAutomation.csproj.user

@@ -10,10 +10,24 @@ namespace Home.Core.Clients
     {
         protected readonly HttpClient _Client;
 
+        public string BaseAddress { get; set; }
+        private string _Token;
+        public string Token
+        {
+            get => _Token;
+            set
+            {
+                _Token = value;
+                _Client.DefaultRequestHeaders.Clear();
+                _Client.DefaultRequestHeaders.Add("Token", value);
+            }
+        }
+
         public ClientBase(string baseUrl, string token)
         {
             _Client = new HttpClient();
-            UpdateBaseAndToken(baseUrl, token);
+            BaseAddress = baseUrl;
+            Token = token;
         }
 
         public ClientBase(HttpClient client)
@@ -21,16 +35,9 @@ namespace Home.Core.Clients
             _Client = client;
         }
 
-        public void UpdateBaseAndToken(string baseUrl, string token)
-        {
-            _Client.BaseAddress = new Uri(baseUrl);
-            _Client.DefaultRequestHeaders.Clear();
-            _Client.DefaultRequestHeaders.Add("Token", token);
-        }
-
         protected async Task<T> GetRequest<T>(string url)
         {
-            var resp = await _Client.GetAsync(url);
+            var resp = await _Client.GetAsync($"{BaseAddress}{url}");
             return await ProcessRequest<T>(resp);
         }
 
@@ -40,20 +47,20 @@ namespace Home.Core.Clients
             var buffer = Encoding.UTF8.GetBytes(content);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            var resp = await _Client.PostAsync(url, byteContent);
+            var resp = await _Client.PostAsync($"{BaseAddress}{url}", byteContent);
             return await ProcessRequest<T>(resp);
         }
 
         protected async Task<T> PutRequest<T>(string url)
         {
             var content = new StringContent("void");
-            var resp = await _Client.PutAsync(url, content);
+            var resp = await _Client.PutAsync($"{BaseAddress}{url}", content);
             return await ProcessRequest<T>(resp);
         }
 
         protected async Task<T> PutRequest<T>(string url, HttpContent content)
         {
-            var resp = await _Client.PutAsync(url, content);
+            var resp = await _Client.PutAsync($"{BaseAddress}{url}", content);
             return await ProcessRequest<T>(resp);
         }
 
