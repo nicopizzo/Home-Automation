@@ -6,39 +6,46 @@
              x:DataType="viewmodel:MainPageViewModel">
 
     <Shell.TitleView>
-        <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+        <Grid>
             <Label Text="Pizzo Home Automation"
-               HorizontalOptions="Center"
+               HorizontalOptions="Center"   
                VerticalOptions="Center"/>
-            <Button Text="Settings" 
+            <ImageButton 
+                Source="ellipsis_vertical_solid.png" 
                 Command="{Binding NavigateToSettingsCommand}" 
                 HorizontalOptions="End" 
-                VerticalOptions="Center"/>
-        </HorizontalStackLayout>
+                VerticalOptions="Center"
+                HeightRequest="30"
+                WidthRequest="30" 
+                Margin="0, 0, 20, 0"/>
+        </Grid>
     </Shell.TitleView>
 
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
+            Spacing="50"
             Padding="30,0"
             VerticalOptions="Center">
 
             <HorizontalStackLayout
                 Spacing="10"
-                HorizontalOptions="Center">
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
                 <Label
                     Text="{Binding GarageStatus}"
                     SemanticProperties.HeadingLevel="Level2"
                     SemanticProperties.Description="Garage Status"
                     FontSize="18"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
 
                 <ImageButton
-                    Source="refresh.svg"
+                    Source="rotate_solid.png"
                     SemanticProperties.Hint="Refresh status"
                     Command="{Binding RefreshGarageStatusCommand}"
                     HorizontalOptions="Center" 
-                    HeightRequest="18"/>
+                    HeightRequest="30"
+                    WidthRequest="30" />
             </HorizontalStackLayout>
            
             <Button

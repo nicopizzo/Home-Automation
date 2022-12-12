@@ -13,8 +13,11 @@
                     <HorizontalStackLayout Margin="20" 
                                            HorizontalOptions="Center"
                                            Spacing="10">
-                        <Label Text="{Binding SettingName}"/>
-                        <Entry Text="{Binding SettingValue}"/>
+                        <Label Text="{Binding SettingName}"
+                               VerticalOptions="Center"
+                               FontAttributes="Bold"/>
+                        <Entry Text="{Binding SettingValue}"
+                               VerticalOptions="Center" />
                     </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

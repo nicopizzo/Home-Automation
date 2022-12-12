@@ -19,7 +19,7 @@ namespace PizzoHomeAutomation.ViewModels
         {
             _SettingService = settingService;
             _ToastService = toastService;
-            ClearSettings();
+            Settings = _SettingService.ExportSettings().ToObservableCollection();
         }
 
         [RelayCommand]
