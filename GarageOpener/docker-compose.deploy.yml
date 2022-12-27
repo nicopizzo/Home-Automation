@@ -13,11 +13,12 @@ services:
       - TokenKey=<sometoken>
     ports:
       - "8000:80"
-  ngrok:
-    image: wernight/ngrok:armhf
+  azure.proxy:
+    image: npizzo92/azurehybridconnectionproxyservice
     restart: always
     environment:
-      NGROK_AUTH: <key>
-      NGROK_PORT: http://garage.service:80
-    ports:
-      - "4040:4040"
+       - AZHybridConnectionOptions__RelayNamespace=<relayNamespace>
+       - AZHybridConnectionOptions__RelayConnectionName=<connectionName>
+       - AZHybridConnectionOptions__KeyName=<keyName>
+       - AZHybridConnectionOptions__Key=<key>
+       - AZHybridConnectionOptions__ForwaredHost=<host>
