@@ -66,3 +66,7 @@
 /PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor/Properties/PublishProfiles
 /PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor.Client/bin/Release/net8.0/wwwroot/_framework
 /PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor.Client/bin/Release/net8.0
+*/.vs
+/PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.metadata.v8.bin
+/PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.projects.v8.bin
+/PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.strings.v8.bin

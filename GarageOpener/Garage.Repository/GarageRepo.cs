@@ -3,22 +3,22 @@ using Garage.Persitance.Interfaces;
 using Home.Core.Gpio;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Device.Gpio;
 using System.Threading.Tasks;
-using Unosquare.RaspberryIO;
-using Unosquare.WiringPi;
 
 namespace Garage.Repository
 {
-    public class GarageRepo : IGarageRepo
+    public class GarageRepo : IGarageRepo, IDisposable
     {
         private readonly GarageConfig _config;
         private readonly ILogger<GarageRepo> _logger;
+        private readonly GpioController _GpioController;
 
         public GarageRepo(GarageConfig config, ILogger<GarageRepo> logger)
         {
             _config = config;
             _logger = logger;
-            Pi.Init<BootstrapWiringPi>();
+            _GpioController = new GpioController();
             InitPins();
         }
 
@@ -27,9 +27,9 @@ namespace Garage.Repository
             var result = GarageStatus.Closed;
             _logger.Log(LogLevel.Information, "Getting Status...");
 
-            var closedPin = Pi.Gpio[_config.ClosedPin];
+            var closedPin = _GpioController.Read(_config.ClosedPin);
 
-            if (closedPin.Read()) result = GarageStatus.Open;
+            if (closedPin == PinValue.High) result = GarageStatus.Open;
 
             _logger.Log(LogLevel.Information, $"Garage is {result}");
             return result;
@@ -38,13 +38,14 @@ namespace Garage.Repository
         public PinDetails GetPinDetails(int pin)
         {
             _logger.Log(LogLevel.Information, $"Getting Details on Pin {pin}");
-            var p = Pi.Gpio[pin];
+            var p = _GpioController.Read(pin);
+            var mode = _GpioController.GetPinMode(pin);
             return new PinDetails()
             {
                 IsOpen = true,
-                PinValue = p.Read() ? 1 : 0,
+                PinValue = p == PinValue.High ? 1 : 0,
                 PinNumber = pin,
-                PinMode = p.PinMode == Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Input ? System.Device.Gpio.PinMode.Input : System.Device.Gpio.PinMode.Output
+                PinMode = mode
             };
         }
 
@@ -52,11 +53,15 @@ namespace Garage.Repository
         {
             try
             {
-                var pin = Pi.Gpio[pinDetails.PinNumber];
-                pin.PinMode = pinDetails.PinMode == System.Device.Gpio.PinMode.Input ? Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Input : Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Output;
-                if(pinDetails.PinMode == System.Device.Gpio.PinMode.Output)
+                if (!_GpioController.IsPinOpen(pinDetails.PinNumber))
                 {
-                    pin.Value = pinDetails.PinValue == 1;
+                    _GpioController.OpenPin(pinDetails.PinNumber);
+                }
+                var pin = _GpioController.GetPinMode(pinDetails.PinNumber);
+                _GpioController.SetPinMode(pinDetails.PinNumber, pinDetails.PinMode);
+                if(pinDetails.PinMode == PinMode.Output)
+                {
+                    _GpioController.Write(pinDetails.PinNumber, pinDetails.PinValue);
                 }
             }
             catch(Exception ex)
@@ -70,10 +75,10 @@ namespace Garage.Repository
         {
             _logger.Log(LogLevel.Information, "Toggling Garage...");
             _logger.Log(LogLevel.Debug, $"Pin {_config.TogglePin} is Open... Setting Low");
-            Pi.Gpio[_config.TogglePin].Value = false;
+            _GpioController.Write(_config.TogglePin, PinValue.Low);
             await Task.Delay(650);
             _logger.Log(LogLevel.Debug, $"Setting Pin {_config.TogglePin} High");
-            Pi.Gpio[_config.TogglePin].Value = true;
+            _GpioController.Write(_config.TogglePin, PinValue.High);
         }
 
         private void InitPins()
@@ -81,13 +86,19 @@ namespace Garage.Repository
             _logger.LogInformation("Initializing pins");
             try
             {
-                Pi.Gpio[_config.TogglePin].PinMode = Unosquare.RaspberryIO.Abstractions.GpioPinDriveMode.Output;
-                Pi.Gpio[_config.TogglePin].Value = true;
+                _GpioController.OpenPin(_config.TogglePin, PinMode.Output);
+                _GpioController.Write(_config.TogglePin, PinValue.High);
+
+                _GpioController.OpenPin(_config.ClosedPin, PinMode.Input);
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex, "Unable to init pins");
             }
+        }
+        public void Dispose()
+        {
+            _GpioController?.Dispose();
         }
     }
 }

@@ -6,7 +6,7 @@ services:
     restart: always
     privileged: true
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Home
       - ASPNETCORE_URLS=http://+:80
       - TogglePin=4
       - ClosedPin=6
@@ -17,7 +17,7 @@ services:
     image: npizzo92/pizzohomeautomationblazor
     restart: always
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Home
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "80:80"

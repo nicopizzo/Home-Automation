@@ -27,17 +27,24 @@ namespace Garage.Service
             services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin"), ClosedPin = Configuration.GetValue<int>("ClosedPin") });
             services.AddSingleton<IGarageRepo, GarageRepo>();
             services.AddHealthChecks();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(b =>
+                {
+                    b.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-
-            app.UseMiddleware<TokenVerification>(Configuration.GetValue<string>("TokenKey"));
-
             app.UseRouting();
-
+            app.UseCors();
+            app.UseMiddleware<TokenVerification>(Configuration.GetValue<string>("TokenKey"));
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
