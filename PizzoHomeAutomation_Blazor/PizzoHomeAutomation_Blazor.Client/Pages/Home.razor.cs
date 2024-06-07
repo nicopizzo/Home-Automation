@@ -13,7 +13,7 @@ public partial class Home
     private HttpClient HttpClient { get; set; } = default!;
 
     private string? _GarageStatus = null;
-    private Uri _BaseEndpoint = new Uri("https://c31cb3c6-091f-4f0a-8fc6-c0f3c36738b4.mock.pstmn.io/");
+    private Uri _BaseEndpoint = new Uri("http://garage.local:8000/");
     private bool _Processing = true;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

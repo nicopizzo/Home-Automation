@@ -7,6 +7,3 @@ services:
       context: ../
       dockerfile: GarageOpener/Garage.Service/Dockerfile
     restart: always
-  homeautomation.web:
-      image: ${DOCKER_REGISTRY-}homeautomationweb
-      context: ../

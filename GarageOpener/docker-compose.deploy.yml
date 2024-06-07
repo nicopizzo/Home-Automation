@@ -13,6 +13,14 @@ services:
       - TokenKey=<sometoken>
     ports:
       - "8000:80"
+  homeautomation.web:
+    image: npizzo92/pizzohomeautomationblazor
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "80:80"
   azure.proxy:
     image: npizzo92/azurehybridconnectionproxyservice
     restart: always
