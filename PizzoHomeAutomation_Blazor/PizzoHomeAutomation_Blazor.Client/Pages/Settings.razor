@@ -1,0 +1,9 @@
+﻿@page "/settings"
+
+<div class="d-flex flex-column gap-2">
+    <div class="d-flex gap-2">
+        <span>Api Key</span>
+        <InputText DisplayName="Api Key" @bind-Value="@_ApiKey" />
+    </div>
+    <button @onclick="() => OnSaveClick()">Save</button>
+</div>

@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<PageTitle>Pizzo Home Automation</PageTitle>
+
+<div class="d-flex flex-column gap-3 align-items-center justify-content-center h-100">
+
+    <span>@(_GarageStatus ?? "Unknown")</span>
+
+    <div class="d-flex gap-2">
+        <button @onclick="() => ToggleState()" disabled="@_Processing">Toggle Garage</button>
+        <button @onclick="() => UpdateState()">Refresh</button>
+    </div>
+</div>

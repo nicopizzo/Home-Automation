@@ -53,3 +53,12 @@
 /PizzoHomeAutomation/bin/Debug
 /PizzoHomeAutomation/obj
 /PizzoHomeAutomation/PizzoHomeAutomation.csproj.user
+/PizzoHomeAutomation-Blazor/.vs/PizzoHomeAutomation-Blazor
+/PizzoHomeAutomation-Blazor/obj
+*.user
+/PizzoHomeAutomation_Blazor/.vs/PizzoHomeAutomation_Blazor
+/PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor/.vs
+/PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor/bin/Debug/net8.0
+/PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor/obj
+/PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor.Client/bin/Debug/net8.0
+/PizzoHomeAutomation_Blazor/PizzoHomeAutomation_Blazor.Client/obj
