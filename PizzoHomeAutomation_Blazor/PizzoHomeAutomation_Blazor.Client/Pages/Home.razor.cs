@@ -72,7 +72,9 @@ public partial class Home
             if (response.IsSuccessStatusCode)
             {
                 ToastService.ShowSuccess("Garage Button Pressed!");
-                await Task.Delay(5000);
+                await Task.Delay(3000);
+                await UpdateState();
+                await Task.Delay(12000);
                 await UpdateState();
             }
             else
