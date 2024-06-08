@@ -11,22 +11,16 @@ public partial class Home
     private ILocalStorageService LocalStorageService { get; set; } = default!;
     [Inject]
     private HttpClient HttpClient { get; set; } = default!;
-    [Inject]
-    private IConfiguration Configuration { get; set; } = default!;
 
     private string? _GarageStatus = null;
     private Uri _BaseEndpoint = default!;
     private bool _Processing = true;
 
-    protected override void OnInitialized()
-    {
-        _BaseEndpoint = new Uri(Configuration.GetValue<string>("ApiUrl") ?? "https://garage.local:8000");
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            await SetEndpoint();
             await AddTokenHeader();
             await UpdateState();
         }
@@ -85,5 +79,11 @@ public partial class Home
             HttpClient.DefaultRequestHeaders.Remove("Token");
         }
         HttpClient.DefaultRequestHeaders.Add("Token", apiKey);
+    }
+
+    private async Task SetEndpoint()
+    {
+        var endpoint = (await LocalStorageService.GetItemAsStringAsync(Settings.ApiUrlName)) ?? Settings.DefaultApiUrl;
+        _BaseEndpoint = new Uri(endpoint);
     }
 }
