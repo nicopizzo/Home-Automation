@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Blazored.LocalStorage;
+using PizzoHomeAutomation_Blazor.Client;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-builder.Services.AddHttpClient();
-builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddBlazorClientServices();
 
 await builder.Build().RunAsync();

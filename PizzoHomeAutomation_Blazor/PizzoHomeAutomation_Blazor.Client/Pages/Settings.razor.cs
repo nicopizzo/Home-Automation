@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace PizzoHomeAutomation_Blazor.Client.Pages;
@@ -7,6 +8,8 @@ public partial class Settings
 {
     [Inject]
     private ILocalStorageService LocalStorageService { get; set; } = default!;
+    [Inject]
+    private IToastService ToastService { get; set; } = default!;
 
     private string _ApiKey = string.Empty;
     private string _ApiUrl = string.Empty;
@@ -28,5 +31,6 @@ public partial class Settings
     {
         await LocalStorageService.SetItemAsStringAsync(ApiKeyName, _ApiKey);
         await LocalStorageService.SetItemAsStringAsync(ApiUrlName, _ApiUrl);
+        ToastService.ShowSuccess("Settings Saved!");
     }
 }

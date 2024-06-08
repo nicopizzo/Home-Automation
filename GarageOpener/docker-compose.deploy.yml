@@ -1,5 +1,3 @@
-version: '3.4'
-
 services:
   garage.service:
     image: npizzo92/garageservice
@@ -7,26 +5,27 @@ services:
     privileged: true
     environment:
       - ASPNETCORE_ENVIRONMENT=Home
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/home.pfx
       - TogglePin=4
       - ClosedPin=6
       - TokenKey=<sometoken>
     ports:
       - "8000:80"
+      - "8001:443"
+    volumes:
+      - ./keys:/https:ro
   homeautomation.web:
     image: npizzo92/pizzohomeautomationblazor
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Home
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/home.pfx
     ports:
       - "80:80"
-  azure.proxy:
-    image: npizzo92/azurehybridconnectionproxyservice
-    restart: always
-    environment:
-       - AZHybridConnectionOptions__RelayNamespace=<relayNamespace>
-       - AZHybridConnectionOptions__RelayConnectionName=<connectionName>
-       - AZHybridConnectionOptions__KeyName=<keyName>
-       - AZHybridConnectionOptions__Key=<key>
-       - AZHybridConnectionOptions__ForwaredHost=<host>
+      - "443:443"
+    volumes:
+      - ./keys:/https:ro

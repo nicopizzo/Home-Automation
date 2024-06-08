@@ -27,13 +27,13 @@ namespace Garage.Service
             services.AddSingleton(f => new GarageConfig() { TogglePin = Configuration.GetValue<int>("TogglePin"), ClosedPin = Configuration.GetValue<int>("ClosedPin") });
             services.AddSingleton<IGarageRepo, GarageRepo>();
             services.AddHealthChecks();
-            services.AddCors(options =>
+            services.AddCors(f =>
             {
-                options.AddDefaultPolicy(b =>
+                f.AddPolicy("AllowAllOrigins", p =>
                 {
-                    b.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    p.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
                 });
             });
         }
@@ -42,8 +42,11 @@ namespace Garage.Service
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseHttpsRedirection();
+            app.UseCors("AllowAllOrigins");
+
             app.UseRouting();
-            app.UseCors();
+            
             app.UseMiddleware<TokenVerification>(Configuration.GetValue<string>("TokenKey"));
             app.UseAuthorization();
 

@@ -1,5 +1,5 @@
-using Blazored.LocalStorage;
 using PizzoHomeAutomation_Blazor.Components;
+using PizzoHomeAutomation_Blazor.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddHttpClient();
+builder.Services.AddBlazorClientServices();
 
 var app = builder.Build();
 

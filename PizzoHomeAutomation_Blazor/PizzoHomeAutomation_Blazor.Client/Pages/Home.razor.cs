@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using PizzoHomeAutomation_Blazor.Client.Models;
 using System.Net.Http.Json;
@@ -11,6 +12,8 @@ public partial class Home
     private ILocalStorageService LocalStorageService { get; set; } = default!;
     [Inject]
     private HttpClient HttpClient { get; set; } = default!;
+    [Inject]
+    private IToastService ToastService { get; set; } = default!;
 
     private string? _GarageStatus = null;
     private Uri _BaseEndpoint = default!;
@@ -23,6 +26,7 @@ public partial class Home
             await SetEndpoint();
             await AddTokenHeader();
             await UpdateState();
+            StateHasChanged();
         }
     }
 
@@ -45,10 +49,15 @@ public partial class Home
                     _GarageStatus = "Closed";
                 }
             }
+            else
+            {
+                ToastService.ShowWarning("Unable to fetch garage status. Please check settings and try again.");
+            }
         }
         catch
         {
             _GarageStatus = null;
+            ToastService.ShowWarning("Unable to send request. Check settings and network settings then try again");
         }
         _Processing = false;
     }
@@ -62,12 +71,18 @@ public partial class Home
             var response = await HttpClient.PutAsync(uri, null);
             if (response.IsSuccessStatusCode)
             {
+                ToastService.ShowSuccess("Garage Button Pressed!");
                 await Task.Delay(5000);
                 await UpdateState();
+            }
+            else
+            {
+                ToastService.ShowWarning("Unable to press garage button. Please check settings and try again.");
             }
         }
         catch
         {
+            ToastService.ShowWarning("Unable to send request. Check settings and network settings then try again");
         }
     }
 
@@ -83,7 +98,14 @@ public partial class Home
 
     private async Task SetEndpoint()
     {
-        var endpoint = (await LocalStorageService.GetItemAsStringAsync(Settings.ApiUrlName)) ?? Settings.DefaultApiUrl;
-        _BaseEndpoint = new Uri(endpoint);
+        try
+        {
+            var endpoint = (await LocalStorageService.GetItemAsStringAsync(Settings.ApiUrlName)) ?? Settings.DefaultApiUrl;
+            _BaseEndpoint = new Uri(endpoint);
+        }
+        catch
+        {
+            ToastService.ShowWarning("Invalid Api Url. Update Settings and try again");
+        }
     }
 }
