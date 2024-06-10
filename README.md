@@ -7,7 +7,6 @@
 	- Obtain certificate and key
 	  - Merge to PFX "certutil -mergepfx mySite.crt mySite.pfx"
 # Hosting - Will host both Service and Web app on Pi
-	- Copy over garage_startup.sh
 	- Copy over docker-compose.deploy.yml
 	- Update entries in docker-compose file
 		- TokenKey
