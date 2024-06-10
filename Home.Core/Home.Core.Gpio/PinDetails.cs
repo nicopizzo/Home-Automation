@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Device.Gpio;
+﻿using System.Device.Gpio;
 
 namespace Home.Core.Gpio
 {
