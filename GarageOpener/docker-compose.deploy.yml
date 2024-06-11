@@ -17,6 +17,8 @@ services:
   homeautomation.web:
     image: npizzo92/pizzohomeautomationblazor
     restart: always
+    depends_on:
+      - garage.service
     environment:
       - ASPNETCORE_ENVIRONMENT=Home
       - ASPNETCORE_URLS=https://+:443;http://+:80
