@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Home.Core.Security;
+using System.IO;
+using LettuceEncrypt;
 
 namespace Garage.Service
 {
@@ -35,6 +37,12 @@ namespace Garage.Service
                     .AllowAnyMethod();
                 });
             });
+
+            var lettuceSection = Configuration.GetSection("LettuceEncrypt");
+            var directoryInfo = new DirectoryInfo(lettuceSection.GetValue<string>("CertDirectory")!);
+
+            services.AddLettuceEncrypt()
+                .PersistDataToDirectory(directoryInfo, lettuceSection.GetValue<string>("CertPassword")!);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

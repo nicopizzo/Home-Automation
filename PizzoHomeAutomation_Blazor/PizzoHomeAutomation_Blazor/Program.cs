@@ -1,5 +1,6 @@
 using PizzoHomeAutomation_Blazor.Components;
 using PizzoHomeAutomation_Blazor.Client;
+using LettuceEncrypt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
+var lettuceSection = builder.Configuration.GetSection("LettuceEncrypt");
+var directoryInfo = new DirectoryInfo(lettuceSection.GetValue<string>("CertDirectory")!);
+
 builder.Services.AddBlazorClientServices();
+builder.Services.AddLettuceEncrypt()
+    .PersistDataToDirectory(directoryInfo, lettuceSection.GetValue<string>("CertPassword")!);
 
 var app = builder.Build();
 

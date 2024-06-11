@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LettuceEncrypt" Version="1.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Home.Core\Home.Core.Gpio\Home.Core.Gpio.csproj" />
     <ProjectReference Include="..\..\Home.Core\Home.Core.Security\Home.Core.Security.csproj" />
     <ProjectReference Include="..\Garage.Persistance\Garage.Persistance.csproj" />
