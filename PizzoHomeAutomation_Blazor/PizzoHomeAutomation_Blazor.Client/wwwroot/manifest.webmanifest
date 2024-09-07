@@ -1,0 +1,38 @@
+{
+  "name": "PizzoHomeAutomation_Blazor.Client",
+  "short_name": "Pizzo Home Automation",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03173d",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icon-640.jpg",
+      "sizes": "640x320",
+      "type": "image/jpg",
+      "form_factor": "wide",
+      "label": "Application"
+    },
+    {
+      "src": "icon-640.jpg",
+      "sizes": "640x320",
+      "type": "image/jpg",
+      "form_factor": "narrow",
+      "label": "Application"
+    }
+  ]
+}
