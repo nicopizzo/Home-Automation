@@ -9,8 +9,9 @@
     "profile"     : "default",
     "region"      : "us-east-2",
     "configuration" : "Release",
-    "framework"     : "netcoreapp2.1",
-    "template"      : "serverless.template",
-    "s3-bucket"     : "nicoautomationbucket",
-    "stack-name"    : "AlexaGarageAutomation"
+    "function-architecture": "x86_64",
+    "function-runtime":"dotnet8",
+    "function-memory-size" : 256,
+    "function-timeout" : 30,
+    "function-handler" : "Alexa_Functions::Alexa_Functions.Function::AlexaHandler"
 }

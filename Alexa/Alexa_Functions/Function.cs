@@ -1,12 +1,9 @@
 using Alexa.NET.Request;
 using Alexa.NET.Request.Type;
 using Alexa.NET.Response;
-using Alexa_Functions.Models;
-using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Home.Core.Clients.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,24 +25,6 @@ namespace Alexa_Functions
         public Function(IServiceProvider serviceProvider)
         {
             _ServiceProvider = serviceProvider;
-        }
-
-        public async Task<APIGatewayProxyResponse> RegisterHandler(APIGatewayProxyRequest request, ILambdaContext context)
-        {
-            var resp = new APIGatewayProxyResponse() { StatusCode = 200 };
-            try
-            {
-                var endpoint = JsonConvert.DeserializeObject<Endpoint>(request.Body);
-                IEndpointService endpointService = _ServiceProvider.GetService<IEndpointService>();
-                await endpointService.SaveEndpoint(endpoint);
-            }
-            catch(Exception ex)
-            {
-                resp.StatusCode = 500;
-                resp.Body = ex.ToString();
-            }
-
-            return resp;
         }
 
         public async Task<SkillResponse> AlexaHandler(SkillRequest input, ILambdaContext context)
@@ -75,18 +54,8 @@ namespace Alexa_Functions
             IntentRequest request = input.Request as IntentRequest;
             var response = CreateBasicSkillResponse();
 
-            // get endpoint values
-            IEndpointService endpointService = _ServiceProvider.GetService<IEndpointService>();
-            var endpoint = await endpointService.GetEndpoint(input.Context.System.User.UserId);
-
-            if (endpoint == null)
-            {
-                response.Response.OutputSpeech = new PlainTextOutputSpeech("Endpoint is not setup");
-                return response;
-            }
-
             // get garage service
-            var garageService = GetGarageService(endpoint);
+            var garageService = _ServiceProvider.GetService<IGarage>();
             string result = null;
 
             switch (request.Intent.Name)
@@ -146,13 +115,6 @@ namespace Alexa_Functions
             if (currentStatus.ToString() == action) return $"Garage is already {ConvertStatus(currentStatus)}";
             await garage.ToggleGarage();
             return $"Garage is {action}ing";
-        }
-
-        private IGarage GetGarageService(Endpoint endpoint)
-        {
-            var client = _ServiceProvider.GetService<IGarage>();
-            client.UpdateBaseAndToken(endpoint.EndpointUrl, endpoint.Token);
-            return client;
         }
 
         private string ConvertStatus(int status)

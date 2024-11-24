@@ -1,9 +1,6 @@
-﻿using Alexa_Functions.Models;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using Amazon.DynamoDBv2;
-using Microsoft.Extensions.Options;
 using Home.Core.Clients.Interfaces;
 using Home.Core.Clients;
 using System.Net.Http;
@@ -17,19 +14,17 @@ namespace Alexa_Functions
         private static IServiceCollection ConfigureServices(IConfigurationRoot root)
         {
             var services = new ServiceCollection();
-
-            services.Configure<DBSettings>(options =>
-                root.GetSection("DBSettings").Bind(options));
-
-            services.AddSingleton<IAmazonDynamoDB>(f =>
-            {
-                var o = f.GetService<IOptions<DBSettings>>();
-                return new AmazonDynamoDBClient(o.Value.AccessKey, o.Value.SecretKey);
-            });
-            services.AddSingleton<IEndpointService, EndpointService>();
             services.AddTransient<IGarage>(f =>
             {
-                return new GarageClient(new HttpClient());
+                // These are set in by the environment variables.
+                // Ensure that these are set in the launch settings and within the aws lambda function.
+                var endpoint = root.GetValue<string>("GarageServiceEndpoint");
+                var token = root.GetValue<string>("GarageServiceToken");
+                var client = new GarageClient(new HttpClient());
+                client.BaseAddress = endpoint;
+                client.Token = token;
+
+                return client;
             });
 
             return services;
@@ -40,7 +35,8 @@ namespace Alexa_Functions
     {
         public static IConfigurationRoot Configuration => new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .Build();
 
         IConfigurationRoot ILambdaConfiguration.Configuration => Configuration;

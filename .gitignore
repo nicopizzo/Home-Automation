@@ -70,3 +70,6 @@
 /PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.metadata.v8.bin
 /PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.projects.v8.bin
 /PizzoHomeAutomation_Blazor/.vs/ProjectEvaluation/pizzohomeautomation_blazor.strings.v8.bin
+/GarageOpener/Garage.Alexa/bin/Debug/net8.0
+/GarageOpener/Garage.Alexa/obj
+/Home.Core/Home.Core.Clients/bin/Release/netstandard2.1
