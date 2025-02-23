@@ -22,6 +22,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Home
       - ASPNETCORE_URLS=https://+:443;http://+:80
+      - LettuceEncrypt__DomainNames__0=example.com
+      - LettuceEncrypt__CertDirectory="/home"
+      - LettuceEncrypt__CertPassword=password
     ports:
       - "80:80"
       - "443:443"
